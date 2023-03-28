@@ -1,4 +1,8 @@
 package Person;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 // Создайте класс Person,
 // которому при создании передавайте имя и дату рождения в виде строки в формате "ДД.ММ.ГГГГ".
 // Реализуйте в классе интерфейс Comparable<Person>, в котором "меньше" будет значить "младше".
@@ -9,13 +13,12 @@ package Person;
 public class Person implements Comparable<Person> {
 
   private String name;
-  private int birthDate;
-  private int age;
+  private LocalDate birthDate;
 
-  public Person(String name, int birthDate, int age) {
+
+  public Person(String name, String birthDate) {
     this.name = name;
-    this.birthDate = birthDate;
-    this.age = age;
+    this.birthDate = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("DD.MM.YYYY"));
   }
 
   public String getName() {
@@ -26,20 +29,12 @@ public class Person implements Comparable<Person> {
     this.name = name;
   }
 
-  public int getAge() {
-    return age;
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = LocalDate.ofEpochDay(birthDate);
   }
 
-  public void setBirthDate(int birthDate) {
-    this.birthDate = birthDate;
-  }
-
-  public int getBirthDate() {
+  public LocalDate getBirthDate() {
     return birthDate;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
   }
 }
 
